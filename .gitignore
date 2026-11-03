@@ -1,0 +1,5 @@
+aandj/
+.claude/
+*.mp4
+test/out/
+__pycache__/
