@@ -2,7 +2,7 @@
 import os, shutil
 from playwright.sync_api import sync_playwright
 
-URL = "http://localhost:8766/"
+URL = "http://localhost:8766/?now=12:00"  # fixed time inside ordering hours
 OUT = os.path.join(os.path.dirname(__file__), "out")
 shutil.rmtree(OUT, ignore_errors=True)
 
