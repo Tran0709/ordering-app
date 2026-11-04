@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>菜园子 · Authentic Hunan Cuisine in Singapore</title>
+<meta name="description" content="菜园子 原味湘菜 — authentic Hunan home cooking at 118 Killiney Road, Singapore. Cooked fresh to order with fresh ingredients.">
+<meta name="theme-color" content="#1f7a34">
+<style>
+:root{--g:#1f7a34;--gd:#0f4a1f;--gold:#f3d27a;--golddk:#b8892b;--ink:#1d1d1b;--mute:#5f5f58;--bg:#faf8f2;--red:#c8281e}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+img{display:block;max-width:100%}a{color:inherit}
+.wrap{max-width:1180px;margin:auto;padding:0 20px}
+.serif{font-family:Georgia,"Times New Roman",serif}
+/* nav */
+header{position:fixed;inset:0 0 auto;z-index:20;transition:background .3s,box-shadow .3s}
+header.solid{background:var(--g);box-shadow:0 2px 10px #0003}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{background:#fff;border-radius:8px;padding:4px 8px;height:48px;display:flex}.logo img{height:40px;width:auto}
+.links{display:flex;gap:26px;align-items:center}
+.links a{color:#fff;text-decoration:none;font-weight:600;font-size:15px}
+.links a:hover{color:var(--gold)}
+.btn{display:inline-block;background:var(--gold);color:var(--gd)!important;padding:11px 22px;border-radius:30px;font-weight:800;text-decoration:none;border:0;font-size:15px}
+.btn:hover{background:#fff}
+.btn.ghost{background:transparent;color:#fff!important;border:2px solid #fff}
+.menuT{display:none;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}
+/* hero */
+.hero{position:relative;min-height:100vh;display:grid;align-items:center;color:#fff;overflow:hidden;background:var(--gd)}
+.hero .bg{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);opacity:.55}
+.hero .bg img{width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0b3317f2 0%,#0f4a1fc4 45%,#0f4a1f40 100%)}
+.hero .wrap{position:relative;z-index:1;padding-top:90px;padding-bottom:60px}
+.hero .kick{color:var(--gold);letter-spacing:4px;font-weight:700}
+.hero h1{font-size:clamp(40px,7vw,78px);line-height:1.1;margin:10px 0 6px;letter-spacing:4px;text-shadow:3px 3px 0 #0006}
+.hero h1 span{color:var(--gold)}
+.hero p.en{font-size:clamp(18px,2.4vw,24px);margin:0 0 26px;max-width:560px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.stat{display:flex;gap:28px;margin-top:44px;flex-wrap:wrap}
+.stat div b{display:block;font-size:34px;color:var(--gold);font-family:Georgia,serif;line-height:1}
+.stat div span{font-size:13px;opacity:.85}
+/* sections */
+section{padding:90px 0}
+.head{text-align:center;max-width:680px;margin:0 auto 46px}
+.head .zh{font-size:clamp(30px,4.5vw,44px);font-weight:900;color:var(--g);letter-spacing:4px;margin:0}
+.head .en{font-family:Georgia,serif;color:var(--golddk);font-size:18px;margin:0 0 10px}
+.head p{color:var(--mute);margin:0}
+/* promises */
+.promise{background:#fff}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pcard{text-align:center;padding:34px 22px;border-radius:12px;background:var(--bg);border:1px solid #ece6d4}
+.laurel{width:118px;height:118px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(#fff6d6,#f1d68c);border:3px double var(--golddk);color:var(--gd);font-weight:900;line-height:1.2;font-size:20px}
+.laurel small{display:block;font-size:13px;font-weight:700;color:var(--golddk)}
+.pcard h3{margin:0 0 6px}.pcard p{margin:0;color:var(--mute);font-size:15px}
+/* story */
+.story .grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.collage{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.collage img{border-radius:10px;aspect-ratio:1;object-fit:cover;box-shadow:0 8px 24px #0002}
+.collage img:first-child{grid-row:span 2;aspect-ratio:auto;height:100%}
+.story h2{font-size:clamp(28px,4vw,40px);color:var(--g);margin:0 0 4px;letter-spacing:3px}
+.story .en{font-family:Georgia,serif;color:var(--golddk);font-size:18px;margin:0 0 18px}
+.story p{color:var(--mute)}
+.story blockquote{margin:22px 0 0;padding:16px 20px;border-left:5px solid var(--gold);background:#fff;border-radius:0 10px 10px 0;font-size:20px;font-weight:800;color:var(--gd)}
+.story blockquote span{display:block;font-family:Georgia,serif;font-weight:400;font-size:15px;color:var(--mute)}
+/* signature */
+.sig{background:var(--gd);color:#fff}
+.sig .head .zh{color:#fff}.sig .head .en{color:var(--gold)}.sig .head p{color:#d6e6da}
+.feat{display:grid;grid-template-columns:1.3fr 1fr;gap:0;border-radius:14px;overflow:hidden;background:#123f20;margin-bottom:26px}
+.feat img{width:100%;height:100%;object-fit:cover;min-height:340px}
+.feat .t{padding:38px}
+.tag{display:inline-block;background:var(--gold);color:var(--gd);font-weight:800;font-size:13px;padding:3px 12px;border-radius:20px}
+.feat h3{font-size:36px;margin:12px 0 0;letter-spacing:3px}.feat .serif{color:var(--gold);font-size:18px}
+.feat p{color:#d6e6da}
+.price{font-family:Georgia,serif;font-size:28px;font-weight:700;color:var(--gold)}.price small{font-size:14px;color:#d6e6da;font-weight:400}
+.dgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.dish{background:#123f20;border-radius:12px;overflow:hidden;transition:transform .2s}
+.dish:hover{transform:translateY(-4px)}
+.dish img{aspect-ratio:4/3;width:100%;object-fit:cover}
+.dish div{padding:14px 16px}.dish b{font-size:18px;display:block}.dish span{font-family:Georgia,serif;font-size:13px;color:#cfe0d3}
+/* menu categories */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cat{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:3/4;color:#fff;text-decoration:none}
+.cat img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.cat:hover img{transform:scale(1.06)}
+.cat div{position:absolute;inset:auto 0 0;padding:50px 16px 16px;background:linear-gradient(transparent,#000c)}
+.cat b{font-size:22px;letter-spacing:2px;display:block}.cat span{font-family:Georgia,serif;font-size:14px;color:var(--gold)}
+.center{text-align:center;margin-top:36px}
+.btn.green{background:var(--g);color:#fff!important}.btn.green:hover{background:var(--gd)}
+/* gallery */
+.gallery{background:#fff}
+.gal{columns:4 220px;column-gap:12px}
+.gal img{width:100%;margin:0 0 12px;border-radius:10px;break-inside:avoid}
+/* visit */
+.visit .grid{display:grid;grid-template-columns:1fr 1.2fr;gap:30px;align-items:stretch}
+.info{background:var(--g);color:#fff;border-radius:14px;padding:36px}
+.info h3{margin:0 0 20px;font-size:28px;letter-spacing:2px}
+.info dl{margin:0;display:grid;gap:18px}
+.info dt{color:var(--gold);font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+.info dd{margin:2px 0 0;font-size:17px}
+.info dd a{color:#fff}
+.map{border-radius:14px;overflow:hidden;min-height:380px;border:1px solid #e3ddcb}
+.map iframe{width:100%;height:100%;min-height:380px;border:0;display:block}
+footer{background:#0b3317;color:#cfe0d3;padding:40px 0;text-align:center;font-size:14px}
+footer .logo{display:inline-flex;margin-bottom:12px}
+footer b{color:var(--gold)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+@media (max-width:900px){
+  .links{position:fixed;inset:68px 0 auto;background:var(--g);flex-direction:column;gap:0;padding:8px 0 18px;display:none}
+  .links.open{display:flex}.links a{padding:12px 20px;width:100%;text-align:center}
+  .menuT{display:block}
+  .pgrid,.story .grid,.feat,.visit .grid{grid-template-columns:1fr}
+  .dgrid,.cats{grid-template-columns:1fr 1fr}
+  .hero .bg{grid-template-columns:1fr}.hero .bg img:not(:first-child){display:none}
+  .feat img{min-height:240px}.feat .t{padding:24px}
+  section{padding:64px 0}
+}
+@media (max-width:480px){.gal{columns:2;column-gap:8px}.gal img{margin-bottom:8px}.dgrid{gap:10px}.dish div{padding:10px}.dish b{font-size:15px}.cat b{font-size:18px}.stat{gap:18px}.stat div b{font-size:26px}}
+</style>
+</head>
+<body>
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="菜园子 home"><img src="../app/img/logo.png" alt="菜园子 原味湘菜"></a>
+    <button class="menuT" aria-label="Menu" onclick="document.querySelector('.links').classList.toggle('open')">☰</button>
+    <nav class="links" onclick="if(event.target.tagName==='A')this.classList.remove('open')">
+      <a href="#about">About</a><a href="#signature">Signature</a><a href="#menu">Menu</a><a href="#gallery">Gallery</a><a href="#visit">Visit us</a>
+      <a class="btn" href="../app/index.html">Order online</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top" style="padding:0">
+  <div class="bg"><img src="../app/img/hunan-stir-fried-pork.jpg" alt=""><img src="../app/img/cai-yuan-zi-steamed-fish-head-with-chopped-chili.jpg" alt=""><img src="../app/img/cai-yuan-zi-stir-fried-yellow-beef.jpg" alt=""></div>
+  <div class="wrap">
+    <div class="kick">原味湘菜 · AUTHENTIC HUNAN CUISINE</div>
+    <h1>让世界爱上<br><span>湖南菜</span></h1>
+    <p class="en serif">Let the world fall in love with Hunan cuisine — 青菜甜，牛肉香. Sweet greens, savoury beef, homemade flavour.</p>
+    <div class="cta"><a class="btn" href="../app/index.html">Order online</a><a class="btn ghost" href="#visit">Find us</a></div>
+    <div class="stat"><div><b>500+</b><span>stores worldwide<br>全球门店</span></div><div><b>40+</b><span>Hunan dishes<br>地道湘菜</span></div><div><b>100%</b><span>cooked to order<br>现点现做</span></div></div>
+  </div>
+</section>
+
+<section class="promise" id="about">
+  <div class="wrap">
+    <div class="head reveal"><p class="en">Our three promises</p><h2 class="zh">我们的承诺</h2></div>
+    <div class="pgrid">
+      <div class="pcard reveal"><div class="laurel">不预制<small>现点现做</small></div><h3>No pre-made dishes</h3><p>Every plate is wok-fired the moment you order — nothing reheated, nothing from a packet.</p></div>
+      <div class="pcard reveal"><div class="laurel">食材鲜<small>新鲜采购</small></div><h3>Fresh ingredients</h3><p>Vegetables, meat and seafood are bought fresh, so the greens stay sweet and the beef stays tender.</p></div>
+      <div class="pcard reveal"><div class="laurel">味道好<small>地道湘味</small></div><h3>Authentic flavour</h3><p>Real Hunan taste — fragrant chili, smoky wok heat and the comforting flavours of home.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="story">
+  <div class="wrap grid">
+    <div class="collage reveal">
+      <img src="../app/img/braised-pork-ribs-with-pickled-vegetables.jpg" alt="Braised pork ribs with pickled vegetables">
+      <img src="../app/img/sauteed-leaf-lettuce.jpg" alt="Sautéed leaf lettuce">
+      <img src="../app/img/old-changsha-spiced-salted-duck.jpg" alt="Old Changsha spiced salted duck">
+    </div>
+    <div class="reveal">
+      <h2>全球华人的家常味</h2>
+      <p class="en">The homemade flavour of Chinese families worldwide</p>
+      <p>菜园子 means “vegetable garden”. Our kitchen cooks the everyday dishes of Hunan — the food families in Changsha eat at home: green chili stir-fried with pork, slow-braised claypots, chopped-chili fish head and bowls of sweet, crisp greens.</p>
+      <p>Hunan cooking is bold and fragrant. Fresh and pickled chilies, garlic and smoky wok heat bring out the natural taste of each ingredient, and every dish is made to be shared with a bowl of steamed rice.</p>
+      <blockquote>青菜甜 · 牛肉香 · 匠心湘菜<span>Sweet greens, savoury beef, Hunan cuisine made with care</span></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="sig" id="signature">
+  <div class="wrap">
+    <div class="head reveal"><p class="en">Signature dishes</p><h2 class="zh">招牌必点</h2><p>The dishes on every table — 桌桌必点.</p></div>
+    <div class="feat reveal">
+      <img src="../app/img/hunan-stir-fried-pork.jpg" alt="Hunan stir-fried pork">
+      <div class="t"><span class="tag">桌桌必点 · Must try</span><h3>湖南小炒肉</h3><div class="serif">Hunan Stir-Fried Pork</div>
+        <p>Our signature. Country pork belly and fresh local green chilies tossed over a roaring flame in a hand-hammered wok — smoky, fragrant and made for rice. Best with a glass of our hand-pressed lemon tea to cool the heat.</p>
+        <div class="price">$18.8 <small>member</small> · $20.9 <small>regular</small></div></div>
+    </div>
+    <div class="dgrid">
+      <div class="dish reveal"><img loading="lazy" src="../app/img/cai-yuan-zi-steamed-fish-head-with-chopped-chili.jpg" alt=""><div><b>菜园子剁椒鱼头</b><span>Steamed Fish Head with Chopped Chili</span></div></div>
+      <div class="dish reveal"><img loading="lazy" src="../app/img/cai-yuan-zi-stir-fried-yellow-beef.jpg" alt=""><div><b>菜园子小炒黄牛肉</b><span>Stir-fried Yellow Beef</span></div></div>
+      <div class="dish reveal"><img loading="lazy" src="../app/img/fish-head-and-tofu-casserole.jpg" alt=""><div><b>鱼头豆腐煲</b><span>Fish Head &amp; Tofu Casserole</span></div></div>
+      <div class="dish reveal"><img loading="lazy" src="../app/img/stir-fried-eel.jpg" alt=""><div><b>爆炒鳝鱼</b><span>Stir-fried Eel</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="head reveal"><p class="en">Explore the menu</p><h2 class="zh">菜单</h2><p>From cold appetisers to nourishing soups and Changsha dim sum.</p></div>
+    <div class="cats">
+      <a class="cat reveal" href="../app/index.html#s-cold"><img loading="lazy" src="../app/img/okra-in-savory-sauce.jpg" alt=""><div><b>开胃小碟</b><span>Cold Appetisers</span></div></a>
+      <a class="cat reveal" href="../app/index.html#s-rice"><img loading="lazy" src="../app/img/braised-pork-tripe-slices.jpg" alt=""><div><b>经典下饭菜</b><span>Classic Rice Dishes</span></div></a>
+      <a class="cat reveal" href="../app/index.html#s-chef"><img loading="lazy" src="../app/img/pan-fried-lotus-root.jpg" alt=""><div><b>大厨精烹</b><span>Chef's Exquisite Cuisine</span></div></a>
+      <a class="cat reveal" href="../app/index.html#s-steam"><img loading="lazy" src="../app/img/garlic-shrimp-with-vermicelli.jpg" alt=""><div><b>蒸蒸日上</b><span>Steamed Dishes</span></div></a>
+      <a class="cat reveal" href="../app/index.html#s-soup"><img loading="lazy" src="../app/img/lotus-root-and-pork-knuckle-soup.jpg" alt=""><div><b>滋补靓汤</b><span>Nourishing Soups</span></div></a>
+      <a class="cat reveal" href="../app/index.html#s-veg"><img loading="lazy" src="../app/img/shredded-cabbage-stir-fry.jpg" alt=""><div><b>我家菜园子</b><span>Garden Vegetables</span></div></a>
+      <a class="cat reveal" href="../app/index.html#s-dim"><img loading="lazy" src="../app/img/sugar-oil-glutinous-rice-cakes.jpg" alt=""><div><b>老长沙点心</b><span>Changsha Dim Sum</span></div></a>
+      <a class="cat reveal" href="../app/index.html#s-drink"><img loading="lazy" src="../app/img/handcrafted-fresh-lemon-tea.jpg" alt=""><div><b>酒水饮料</b><span>Beverages</span></div></a>
+    </div>
+    <div class="center"><a class="btn green" href="../app/index.html">See full menu &amp; order</a></div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="head reveal"><p class="en">From our kitchen</p><h2 class="zh">美食图集</h2></div>
+    <div class="gal">
+      <img loading="lazy" src="../app/img/steamed-sea-bass-with-chili-sauce.jpg" alt="Steamed sea bass with chili sauce">
+      <img loading="lazy" src="../app/img/garlic-chicken-feet.jpg" alt="Garlic chicken feet">
+      <img loading="lazy" src="../app/img/braised-beef-brisket-with-tomato.jpg" alt="Braised beef brisket with tomato">
+      <img loading="lazy" src="../app/img/sizzling-clams-with-hot-oil.jpg" alt="Sizzling clams with hot oil">
+      <img loading="lazy" src="../app/img/hot-and-sour-chicken.jpg" alt="Hot and sour chicken">
+      <img loading="lazy" src="../app/img/braised-tofu-in-clay-pot.jpg" alt="Braised tofu in clay pot">
+      <img loading="lazy" src="../app/img/spicy-grilled-shrimp-skewers.jpg" alt="Spicy grilled shrimp skewers">
+      <img loading="lazy" src="../app/img/pumpkin-pancakes.jpg" alt="Pumpkin pancakes">
+      <img loading="lazy" src="../app/img/minced-pork-eggplant-casserole.jpg" alt="Minced pork eggplant casserole">
+      <img loading="lazy" src="../app/img/steamed-egg-with-minced-pork.jpg" alt="Steamed egg with minced pork">
+      <img loading="lazy" src="../app/img/dry-pot-squid-tentacles.jpg" alt="Dry pot squid tentacles">
+      <img loading="lazy" src="../app/img/grilled-white-culter-fish.jpg" alt="Grilled white culter fish">
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="head reveal"><p class="en">Visit us</p><h2 class="zh">欢迎光临</h2></div>
+    <div class="grid">
+      <div class="info reveal">
+        <h3>菜园子 Singapore</h3>
+        <dl>
+          <div><dt>Address 地址</dt><dd>118 Killiney Road #01-02<br>Singapore 239555</dd></div>
+          <div><dt>Orders &amp; reservations 订餐电话</dt><dd><a href="tel:+6560419403">6041 9403</a></dd></div>
+          <div><dt>Opening hours 营业时间</dt><dd>Please call to confirm today's hours</dd></div>
+          <div><dt>Dine-in · Pickup · Delivery</dt><dd>Order ahead online and pay by PayNow, card, Apple / Google Pay, GrabPay or cash.</dd></div>
+        </dl>
+        <p style="margin:26px 0 0;display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="../app/index.html">Order online</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=118+Killiney+Road+Singapore+239555" target="_blank" rel="noopener">Directions</a></p>
+      </div>
+      <div class="map reveal"><iframe title="Map to 118 Killiney Road" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=118%20Killiney%20Road%2C%20Singapore%20239555&amp;z=16&amp;output=embed"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo"><img src="../app/img/logo.png" alt="菜园子"></div>
+  <div><b>让世界爱上湖南菜</b> · Let the world fall in love with Hunan Cuisine</div>
+  <div>118 Killiney Road #01-02, Singapore 239555 · 6041 9403</div>
+  <div style="margin-top:8px;opacity:.7">© <span id="yr"></span> 菜园子 原味湘菜</div>
+</footer>
+
+<script>
+const h=document.getElementById('hdr');const onS=()=>h.classList.toggle('solid',scrollY>40);addEventListener('scroll',onS,{passive:true});onS();
+document.getElementById('yr').textContent=new Date().getFullYear();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
