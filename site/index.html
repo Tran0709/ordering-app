@@ -108,6 +108,22 @@ section{padding:90px 0}
 .info dd a{color:#fff}
 .map{border-radius:14px;overflow:hidden;min-height:380px;border:1px solid #e3ddcb}
 .map iframe{width:100%;height:100%;min-height:380px;border:0;display:block}
+.reserve{background:var(--gd);color:#fff}
+.reserve .head .zh{color:#fff}.reserve .head .en{color:var(--gold)}.reserve .head p{color:#d6e6da}
+.rform{max-width:760px;margin:auto;background:#fff;color:var(--ink);border-radius:14px;padding:30px;box-shadow:0 10px 30px #0004}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.rgrid .full{grid-column:1/-1}
+.rform label{display:block;font-size:13px;font-weight:700;color:var(--mute);margin-bottom:5px}
+.rform input,.rform select,.rform textarea{width:100%;padding:12px;border:1px solid #ddd6c3;border-radius:8px;font:inherit;background:#fff}
+.rform input:focus,.rform select:focus,.rform textarea:focus{outline:2px solid var(--g);border-color:var(--g)}
+.guests{display:flex;align-items:center;gap:10px}.guests button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--g);background:#fff;color:var(--g);font-size:20px;font-weight:800;cursor:pointer}.guests output{min-width:34px;text-align:center;font-size:20px;font-weight:800}
+.rerr{color:var(--red);font-size:14px;margin-top:12px;min-height:1em}
+.ractions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.ractions .btn{flex:1;text-align:center;cursor:pointer;min-width:200px}
+.btn.wa{background:#25d366;color:#fff!important}.btn.wa:hover{background:#1ebe5b}
+.btn.call{background:#fff;color:var(--g)!important;border:2px solid var(--g)}
+.rnote{font-size:13px;color:var(--mute);margin:12px 0 0}
+.rdone{display:none;text-align:center;padding:14px 0 0}.rdone.on{display:block}.rdone b{font-size:20px;color:var(--g)}
 footer{background:#0b3317;color:#cfe0d3;padding:40px 0;text-align:center;font-size:14px}
 footer .logo{display:inline-flex;margin-bottom:12px}
 footer b{color:var(--gold)}
@@ -117,7 +133,8 @@ footer b{color:var(--gold)}
   .links{position:fixed;inset:var(--hdr,106px) 0 auto;background:var(--g);flex-direction:column;gap:0;padding:8px 0 18px;display:none}
   .links.open{display:flex}.links a{padding:12px 20px;width:100%;text-align:center}
   .menuT{display:block}
-  .pgrid,.story .grid,.feat,.visit .grid{grid-template-columns:1fr}
+  .pgrid,.story .grid,.feat,.visit .grid,.rgrid{grid-template-columns:1fr}
+  .rform{padding:20px}
   .dgrid,.cats{grid-template-columns:1fr 1fr}
   .hero .bg{grid-template-columns:1fr}.hero .bg img:not(:first-child){display:none}
   .feat img{min-height:240px}.feat .t{padding:24px}
@@ -128,13 +145,13 @@ footer b{color:var(--gold)}
 </head>
 <body>
 <header id="hdr">
-  <div class="hoursbar" role="note"><div class="wrap"><span class="ic">🕒</span><span><span class="lbl">Online ordering hours: </span><span class="lbl2">Order online </span><b>11:30am – 2:30pm</b> · <b>5:30pm – 9:30pm</b></span><span id="openpill" class="pill"></span><a href="../app/index.html">Order now →</a></div></div>
+  <div class="hoursbar" role="note"><div class="wrap"><span class="ic">🕒</span><span><span class="lbl">Opening hours: </span><span class="lbl2">Open </span><b>11:30am – 2:30pm</b> · <b>5:30pm – 9:30pm</b></span><span id="openpill" class="pill"></span><a href="#reserve">Book a table →</a></div></div>
   <div class="wrap nav">
     <a href="#top" class="logo" aria-label="菜园子 home"><img src="../app/img/logo.png" alt="菜园子 原味湘菜"></a>
     <button class="menuT" aria-label="Menu" onclick="document.querySelector('.links').classList.toggle('open')">☰</button>
     <nav class="links" onclick="if(event.target.tagName==='A')this.classList.remove('open')">
-      <a href="#about">About</a><a href="#signature">Signature</a><a href="#menu">Menu</a><a href="#gallery">Gallery</a><a href="#visit">Visit us</a>
-      <a class="btn" href="../app/index.html">Order online</a>
+      <a href="#about">About</a><a href="#signature">Signature</a><a href="#menu">Menu</a><a href="#gallery">Gallery</a><a href="#reserve">Reservations</a><a href="#visit">Visit us</a>
+      <a class="btn" href="#reserve">Book a table</a>
     </nav>
   </div>
 </header>
@@ -145,7 +162,7 @@ footer b{color:var(--gold)}
     <div class="kick">原味湘菜 · AUTHENTIC HUNAN CUISINE</div>
     <h1>让世界爱上<br><span>湖南菜</span></h1>
     <p class="en serif">Let the world fall in love with Hunan cuisine — 青菜甜，牛肉香. Sweet greens, savoury beef, homemade flavour.</p>
-    <div class="cta"><a class="btn" href="../app/index.html">Order online</a><a class="btn ghost" href="#visit">Find us</a></div>
+    <div class="cta"><a class="btn" href="#reserve">Book a table</a><a class="btn ghost" href="#visit">Find us</a></div>
     <div class="stat"><div><b>500+</b><span>stores worldwide<br>全球门店</span></div><div><b>40+</b><span>Hunan dishes<br>地道湘菜</span></div><div><b>100%</b><span>cooked to order<br>现点现做</span></div></div>
   </div>
 </section>
@@ -200,16 +217,16 @@ footer b{color:var(--gold)}
   <div class="wrap">
     <div class="head reveal"><p class="en">Explore the menu</p><h2 class="zh">菜单</h2><p>From cold appetisers to nourishing soups and Changsha dim sum.</p></div>
     <div class="cats">
-      <a class="cat reveal" href="../app/index.html#s-cold"><img loading="lazy" src="../app/img/okra-in-savory-sauce.jpg" alt=""><div><b>开胃小碟</b><span>Cold Appetisers</span></div></a>
-      <a class="cat reveal" href="../app/index.html#s-rice"><img loading="lazy" src="../app/img/braised-pork-tripe-slices.jpg" alt=""><div><b>经典下饭菜</b><span>Classic Rice Dishes</span></div></a>
-      <a class="cat reveal" href="../app/index.html#s-chef"><img loading="lazy" src="../app/img/pan-fried-lotus-root.jpg" alt=""><div><b>大厨精烹</b><span>Chef's Exquisite Cuisine</span></div></a>
-      <a class="cat reveal" href="../app/index.html#s-steam"><img loading="lazy" src="../app/img/garlic-shrimp-with-vermicelli.jpg" alt=""><div><b>蒸蒸日上</b><span>Steamed Dishes</span></div></a>
-      <a class="cat reveal" href="../app/index.html#s-soup"><img loading="lazy" src="../app/img/lotus-root-and-pork-knuckle-soup.jpg" alt=""><div><b>滋补靓汤</b><span>Nourishing Soups</span></div></a>
-      <a class="cat reveal" href="../app/index.html#s-veg"><img loading="lazy" src="../app/img/shredded-cabbage-stir-fry.jpg" alt=""><div><b>我家菜园子</b><span>Garden Vegetables</span></div></a>
-      <a class="cat reveal" href="../app/index.html#s-dim"><img loading="lazy" src="../app/img/sugar-oil-glutinous-rice-cakes.jpg" alt=""><div><b>老长沙点心</b><span>Changsha Dim Sum</span></div></a>
-      <a class="cat reveal" href="../app/index.html#s-drink"><img loading="lazy" src="../app/img/handcrafted-fresh-lemon-tea.jpg" alt=""><div><b>酒水饮料</b><span>Beverages</span></div></a>
+      <div class="cat reveal"><img loading="lazy" src="../app/img/okra-in-savory-sauce.jpg" alt=""><div><b>开胃小碟</b><span>Cold Appetisers</span></div></div>
+      <div class="cat reveal"><img loading="lazy" src="../app/img/braised-pork-tripe-slices.jpg" alt=""><div><b>经典下饭菜</b><span>Classic Rice Dishes</span></div></div>
+      <div class="cat reveal"><img loading="lazy" src="../app/img/pan-fried-lotus-root.jpg" alt=""><div><b>大厨精烹</b><span>Chef's Exquisite Cuisine</span></div></div>
+      <div class="cat reveal"><img loading="lazy" src="../app/img/garlic-shrimp-with-vermicelli.jpg" alt=""><div><b>蒸蒸日上</b><span>Steamed Dishes</span></div></div>
+      <div class="cat reveal"><img loading="lazy" src="../app/img/lotus-root-and-pork-knuckle-soup.jpg" alt=""><div><b>滋补靓汤</b><span>Nourishing Soups</span></div></div>
+      <div class="cat reveal"><img loading="lazy" src="../app/img/shredded-cabbage-stir-fry.jpg" alt=""><div><b>我家菜园子</b><span>Garden Vegetables</span></div></div>
+      <div class="cat reveal"><img loading="lazy" src="../app/img/sugar-oil-glutinous-rice-cakes.jpg" alt=""><div><b>老长沙点心</b><span>Changsha Dim Sum</span></div></div>
+      <div class="cat reveal"><img loading="lazy" src="../app/img/handcrafted-fresh-lemon-tea.jpg" alt=""><div><b>酒水饮料</b><span>Beverages</span></div></div>
     </div>
-    <div class="center"><a class="btn green" href="../app/index.html">See full menu &amp; order</a></div>
+    <div class="center"><a class="btn green" href="#reserve">Book a table</a></div>
   </div>
 </section>
 
@@ -233,6 +250,29 @@ footer b{color:var(--gold)}
   </div>
 </section>
 
+<section class="reserve" id="reserve">
+  <div class="wrap">
+    <div class="head reveal"><p class="en">Reservations</p><h2 class="zh">预订餐位</h2><p>Book your table for lunch or dinner. We'll confirm your booking by message or phone.</p></div>
+    <form class="rform reveal" id="rform" novalidate>
+      <div class="rgrid">
+        <div><label for="rdate">Date 日期</label><input type="date" id="rdate" required></div>
+        <div><label for="rtime">Time 时间</label><select id="rtime" required></select></div>
+        <div><label>Guests 人数</label><div class="guests"><button type="button" aria-label="Fewer guests" data-d="-1">−</button><output id="rpax">2</output><button type="button" aria-label="More guests" data-d="1">+</button></div></div>
+        <div><label for="rname">Name 姓名</label><input id="rname" autocomplete="name" required></div>
+        <div class="full"><label for="rphone">Mobile number 手机号码</label><input id="rphone" inputmode="tel" autocomplete="tel" placeholder="8XXX XXXX" required></div>
+        <div class="full"><label for="rnote">Special requests 备注 (optional)</label><textarea id="rnote" rows="2" placeholder="e.g. birthday, baby chair, less spicy"></textarea></div>
+      </div>
+      <div class="rerr" id="rerr" role="alert"></div>
+      <div class="ractions">
+        <button type="submit" class="btn wa">Send booking via WhatsApp</button>
+        <a class="btn call" href="tel:+6560419403">Call 6041 9403</a>
+      </div>
+      <p class="rnote">Lunch seatings 11:30am – 1:30pm · Dinner seatings 5:30pm – 8:30pm. For groups of more than 10, please call us.</p>
+      <div class="rdone" id="rdone"><b>谢谢！Your booking message is ready</b><p>Press send in WhatsApp. Your table is confirmed once we reply.</p></div>
+    </form>
+  </div>
+</section>
+
 <section class="visit" id="visit">
   <div class="wrap">
     <div class="head reveal"><p class="en">Visit us</p><h2 class="zh">欢迎光临</h2></div>
@@ -241,11 +281,11 @@ footer b{color:var(--gold)}
         <h3>菜园子 Singapore</h3>
         <dl>
           <div><dt>Address 地址</dt><dd>118 Killiney Road #01-02<br>Singapore 239555</dd></div>
-          <div><dt>Orders &amp; reservations 订餐电话</dt><dd><a href="tel:+6560419403">6041 9403</a></dd></div>
-          <div><dt>Online ordering hours 点餐时间</dt><dd>11:30am – 2:30pm<br>5:30pm – 9:30pm</dd></div>
-          <div><dt>Dine-in · Pickup · Delivery</dt><dd>Order ahead online and pay by PayNow, card, Apple / Google Pay, GrabPay or cash.</dd></div>
+          <div><dt>Reservations 订位电话</dt><dd><a href="tel:+6560419403">6041 9403</a></dd></div>
+          <div><dt>Opening hours 营业时间</dt><dd>11:30am – 2:30pm<br>5:30pm – 9:30pm</dd></div>
+          <div><dt>Book a table 预订</dt><dd>Reserve online or call us. Walk-ins welcome when tables are free.</dd></div>
         </dl>
-        <p style="margin:26px 0 0;display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="../app/index.html">Order online</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=118+Killiney+Road+Singapore+239555" target="_blank" rel="noopener">Directions</a></p>
+        <p style="margin:26px 0 0;display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="#reserve">Book a table</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=118+Killiney+Road+Singapore+239555" target="_blank" rel="noopener">Directions</a></p>
       </div>
       <div class="map reveal"><iframe title="Map to 118 Killiney Road" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=118%20Killiney%20Road%2C%20Singapore%20239555&amp;z=16&amp;output=embed"></iframe></div>
     </div>
@@ -261,13 +301,36 @@ footer b{color:var(--gold)}
 
 <script>
 const h=document.getElementById('hdr');const onS=()=>h.classList.toggle('solid',scrollY>40);addEventListener('scroll',onS,{passive:true});onS();
-// ordering hours in Singapore time, minutes after midnight (same as ../app/index.html)
+// opening hours in Singapore time, minutes after midnight
 const HOURS=[[690,870],[1050,1290]];
 const hm=m=>{const h=Math.floor(m/60);return `${(h+11)%12+1}:${String(m%60).padStart(2,"0")}${h<12?"am":"pm"}`};
 function showHours(){const d=new Date(Date.now()+8*3600e3),n=d.getUTCHours()*60+d.getUTCMinutes(),w=HOURS.find(([a,b])=>n>=a&&n<b),nx=HOURS.find(([a])=>a>n),el=document.getElementById('openpill');
   el.className='pill'+(w?'':' closed');el.textContent=w?'Open now · until '+hm(w[1]):'Closed · opens '+(nx?hm(nx[0])+' today':hm(HOURS[0][0])+' tomorrow');
   document.documentElement.style.setProperty('--hdr',h.offsetHeight+'px')}
-showHours();setInterval(showHours,60e3);addEventListener('resize',showHours);
+showHours();setInterval(showHours,60e3);
+// reservations: seatings run until an hour before each closing time
+const SEATS=[[690,810],[1050,1230]], RPHONE='6560419403';
+const sgDate=(o=0)=>new Date(Date.now()+8*3600e3+o*864e5).toISOString().slice(0,10);
+const rdate=document.getElementById('rdate'),rtime=document.getElementById('rtime'),rpax=document.getElementById('rpax');
+rdate.min=sgDate();rdate.max=sgDate(60);rdate.value=sgDate();
+function fillTimes(){const d=new Date(Date.now()+8*3600e3),now=d.getUTCHours()*60+d.getUTCMinutes(),today=rdate.value===sgDate(),keep=rtime.value;
+  const opts=[];for(const [a,b] of SEATS)for(let m=a;m<=b;m+=15)if(!today||m>now+30)opts.push(hm(m));
+  rtime.innerHTML=opts.length?opts.map(t=>`<option${t===keep?' selected':''}>${t}</option>`).join(''):'<option value="">No more seatings today</option>'}
+rdate.onchange=fillTimes;fillTimes();
+document.querySelectorAll('.guests button').forEach(b=>b.onclick=()=>{rpax.value=Math.min(20,Math.max(1,+rpax.value+ +b.dataset.d))});
+document.getElementById('rform').onsubmit=e=>{e.preventDefault();const err=document.getElementById('rerr'),v=id=>document.getElementById(id).value.trim(),pax=+rpax.value;
+  const phone=v('rphone').replace(/\D/g,'').replace(/^65(?=\d{8}$)/,'');
+  if(!rdate.value||rdate.value<rdate.min||rdate.value>rdate.max)return err.textContent='Please choose a date within the next 60 days.';
+  if(!rtime.value)return err.textContent='No more seatings on this date. Please pick another date.';
+  if(!v('rname'))return err.textContent='Please enter your name.';
+  if(!/^[689]\d{7}$/.test(phone))return err.textContent='Please enter a valid Singapore mobile number.';
+  if(pax>10)return err.textContent='For groups of more than 10, please call us on 6041 9403.';
+  err.textContent='';
+  const day=new Date(rdate.value+'T00:00:00').toLocaleDateString('en-SG',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  const msg=`Hi 菜园子, I'd like to book a table.\nName: ${v('rname')}\nDate: ${day}\nTime: ${rtime.value}\nGuests: ${pax}\nMobile: ${phone}`+(v('rnote')?`\nRequests: ${v('rnote')}`:'');
+  window.__lastWa='https://wa.me/'+RPHONE+'?text='+encodeURIComponent(msg);
+  window.open(window.__lastWa,'_blank','noopener');
+  document.getElementById('rdone').classList.add('on')};addEventListener('resize',showHours);
 document.getElementById('yr').textContent=new Date().getFullYear();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
