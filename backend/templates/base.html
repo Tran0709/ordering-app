@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}菜园子 Staff{% endblock %}</title>
+<style>
+:root{--g:#1f7a34;--gd:#145a25;--gold:#f3d27a;--ink:#1d1d1b;--mute:#6b6b66;--bg:#f4f3ee;--line:#e3e0d6;--red:#c8281e;--amber:#b7791f;--blue:#2b6cb0}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);font-size:15px}
+a{color:var(--g)}
+header{background:var(--g);color:#fff}
+header .in{max-width:1280px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:14px}
+header img{height:34px;background:#fff;border-radius:6px;padding:3px 6px}
+header b{flex:1;font-size:17px}
+header a{color:#fff;font-size:14px}
+main{max-width:1280px;margin:auto;padding:18px 16px 60px}
+h1{font-size:22px;margin:4px 0 14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px}
+.btn{display:inline-block;border:0;border-radius:8px;padding:9px 14px;font:inherit;font-weight:700;cursor:pointer;background:var(--g);color:#fff;text-decoration:none}
+.btn.ghost{background:#fff;color:var(--g);border:1px solid var(--g)}
+.btn.red{background:var(--red)}
+input,select,textarea{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.badge{display:inline-block;border-radius:12px;padding:2px 9px;font-size:12px;font-weight:800;white-space:nowrap}
+.b-paid{background:#e3f4e7;color:var(--g)}.b-pending{background:#fff4d6;color:var(--amber)}.b-failed{background:#fde4e2;color:var(--red)}
+.b-refunded{background:#e6eefb;color:var(--blue)}.b-unpaid_cash{background:#fff0e0;color:#a85a00}
+.b-k{background:#eee;color:#444}
+.muted{color:var(--mute)}
+.demo{background:#fff4d6;border:1px solid #f0d58a;color:#7a5600;border-radius:8px;padding:8px 12px;margin-bottom:14px;font-size:14px}
+</style>
+{% block head %}{% endblock %}
+</head>
+<body>
+<header><div class="in"><img src="/img/logo.png" alt="菜园子"><b>{% block heading %}Staff back office{% endblock %}</b>{% if session.staff %}<a href="/staff">Transactions</a><a href="/staff/logout">Log out</a>{% endif %}</div></header>
+<main>
+{% if provider == 'demo' and session.staff %}<div class="demo">Demo payment mode: no real money is collected. Set PAYMENT_PROVIDER to hitpay or stripe to take real payments.</div>{% endif %}
+{% block body %}{% endblock %}
+</main>
+</body>
+</html>

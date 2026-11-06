@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Demo payment · 菜园子{% endblock %}
+{% block heading %}Demo payment page{% endblock %}
+{% block body %}
+<div class="card" style="max-width:460px;margin:20px auto;text-align:center">
+  <div class="demo">This is a test page. With HitPay or Stripe connected, customers see the provider's real payment page here instead.</div>
+  <h1>Pay ${{ '%.2f' % o.total }}</h1>
+  <p class="muted">Order {{ o.id }} · {{ PAY_LABEL[o.pay_method] }}</p>
+  <form method="post"><button class="btn" style="width:100%;padding:14px">Simulate successful payment</button></form>
+  <p><a href="/order/{{ o.id }}?t={{ o.token }}">Cancel and go back</a></p>
+</div>
+{% endblock %}

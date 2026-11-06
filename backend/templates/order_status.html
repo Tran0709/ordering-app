@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Order {{ o.id }} · 菜园子{% endblock %}
+{% block heading %}菜园子 · Your order{% endblock %}
+{% block body %}
+<div class="card" style="max-width:520px;margin:20px auto;text-align:center">
+  <h1>Order {{ o.id }}</h1>
+  <p><span class="badge b-{{ o.pay_status }}" id="pay">{{ STATUS_LABEL[o.pay_status] }}</span></p>
+  <div id="msg">
+  {% if o.pay_status == 'paid' %}<p>谢谢！Thank you, {{ o.customer_name }}. Your payment of <b>${{ '%.2f' % o.total }}</b> is confirmed and your order is with the kitchen.</p>
+  {% elif o.pay_status == 'unpaid_cash' %}<p>Thank you, {{ o.customer_name }}. Please pay <b>${{ '%.2f' % o.total }}</b> by cash or NETS at the counter.</p>
+  {% elif o.pay_status == 'pending' %}<p>We're waiting for confirmation from the payment provider. This page updates by itself.</p>
+  {% else %}<p>The payment didn't go through. Please order again, or call us on 6041 9403.</p>{% endif %}
+  </div>
+  <p class="muted">{{ {'dine':'Dine-in · Table ' ~ (o.table_no or ''),'pickup':'Pickup','delivery':'Delivery'}[o.order_type] }}{% if o.order_type != 'dine' %} · {{ 'ASAP' if o.ready_time == 'asap' else o.ready_time }}{% endif %}</p>
+  <p class="muted" style="font-size:13px">Kitchen status: <b id="kit">{{ o.kitchen_status|capitalize }}</b></p>
+  <p><a class="btn ghost" href="/">Back to menu</a></p>
+</div>
+<script>
+const pay="{{ o.pay_status }}";
+setInterval(async()=>{try{const r=await fetch(location.pathname.replace('/order/','/api/orders/')+location.search);const j=await r.json();
+  if(j.pay_status!==pay)location.reload();document.getElementById('kit').textContent=j.kitchen_status[0].toUpperCase()+j.kitchen_status.slice(1)}catch(e){}},5000);
+</script>
+{% endblock %}

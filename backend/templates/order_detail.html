@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}{{ o.id }} · 菜园子{% endblock %}
+{% block head %}
+<style>
+.grid{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
+dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;margin:0}dt{color:var(--mute)}dd{margin:0}
+table{width:100%;border-collapse:collapse}td,th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.tot td{border:0;padding:3px 6px}.tot .big td{font-size:18px;font-weight:800;border-top:2px solid var(--ink);padding-top:8px}
+.ev{list-style:none;margin:0;padding:0}.ev li{padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.ev b{text-transform:capitalize}
+.acts{display:grid;gap:10px}.acts form{display:flex;gap:8px;flex-wrap:wrap}
+h2{font-size:16px;margin:0 0 10px}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+</style>
+{% endblock %}
+{% block body %}
+<p><a href="/staff">← All transactions</a></p>
+<h1>{{ o.id }} <span class="badge b-{{ o.pay_status }}">{{ STATUS_LABEL[o.pay_status] }}</span> <span class="badge b-k">{{ o.kitchen_status|capitalize }}</span></h1>
+<div class="grid">
+  <div class="card">
+    <h2>Items</h2>
+    <table>
+      {% for i in o.lines %}<tr><td>{{ i.qty }} ×</td><td>{{ i.name }}{% if i.option %} <span class="muted">({{ i.option }})</span>{% endif %}</td><td class="num">${{ '%.2f' % i.unit }}</td><td class="num">${{ '%.2f' % (i.unit * i.qty) }}</td></tr>{% endfor %}
+    </table>
+    <table class="tot" style="margin-top:10px">
+      <tr><td>Subtotal {{ '(member price)' if o.member_price else '(regular price)' }}</td><td class="num">${{ '%.2f' % o.subtotal }}</td></tr>
+      {% if o.service %}<tr><td>Service charge 10%</td><td class="num">${{ '%.2f' % o.service }}</td></tr>{% endif %}
+      {% if o.order_type == 'delivery' %}<tr><td>Delivery</td><td class="num">${{ '%.2f' % o.delivery_fee }}</td></tr>{% endif %}
+      <tr><td>GST 9%</td><td class="num">${{ '%.2f' % o.gst }}</td></tr>
+      <tr class="big"><td>Total</td><td class="num">${{ '%.2f' % o.total }}</td></tr>
+    </table>
+    {% if o.member_price %}<p style="color:var(--amber);font-weight:700">⚠ Customer chose member price – check membership.</p>{% endif %}
+    {% if o.notes %}<p><b>Kitchen notes:</b> {{ o.notes }}</p>{% endif %}
+  </div>
+  <div style="display:grid;gap:16px;align-content:start">
+    <div class="card">
+      <h2>Order &amp; payment</h2>
+      <dl>
+        <dt>Placed</dt><dd>{{ o.created_at[0:10] }} {{ o.created_at[11:16] }}</dd>
+        <dt>Type</dt><dd>{{ {'dine':'Dine-in','pickup':'Pickup','delivery':'Delivery'}[o.order_type] }}{% if o.table_no %} · Table {{ o.table_no }}{% endif %}{% if o.order_type != 'dine' %} · {{ 'ASAP' if o.ready_time == 'asap' else o.ready_time }}{% endif %}</dd>
+        {% if o.address %}<dt>Address</dt><dd>{{ o.address }}</dd>{% endif %}
+        <dt>Customer</dt><dd>{{ o.customer_name }} · <a href="tel:+65{{ o.phone }}">{{ o.phone }}</a></dd>
+        <dt>Method</dt><dd>{{ PAY_LABEL[o.pay_method] }}</dd>
+        <dt>Provider</dt><dd>{{ o.provider }}</dd>
+        {% if o.provider_ref %}<dt>Payment ref</dt><dd style="word-break:break-all">{{ o.provider_ref }}</dd>{% endif %}
+        {% if o.paid_at %}<dt>Paid at</dt><dd>{{ o.paid_at[0:10] }} {{ o.paid_at[11:16] }}</dd>{% endif %}
+      </dl>
+    </div>
+    <div class="card acts">
+      <h2>Actions</h2>
+      <form method="post" action="/staff/order/{{ o.id }}/kitchen"><input type="hidden" name="csrf" value="{{ csrf }}">
+        <select name="status">{% for k in KITCHEN %}<option value="{{k}}" {{ 'selected' if o.kitchen_status==k }}>{{ k|capitalize }}</option>{% endfor %}</select>
+        <button class="btn">Update kitchen status</button></form>
+      {% if o.pay_status == 'unpaid_cash' %}
+      <form method="post" action="/staff/order/{{ o.id }}/cash"><input type="hidden" name="csrf" value="{{ csrf }}">
+        <input name="note" placeholder="e.g. Cash, NETS" style="flex:1"><button class="btn">Mark cash/NETS received</button></form>
+      {% endif %}
+      {% if o.pay_status == 'paid' %}
+      <form method="post" action="/staff/order/{{ o.id }}/refund" onsubmit="return confirm('Record this order as refunded? Issue the refund in the payment provider dashboard as well.')"><input type="hidden" name="csrf" value="{{ csrf }}">
+        <input name="note" placeholder="Reason for refund" style="flex:1"><button class="btn red">Record refund</button></form>
+      {% endif %}
+      <form method="post" action="/staff/order/{{ o.id }}/note"><input type="hidden" name="csrf" value="{{ csrf }}">
+        <input name="note" placeholder="Add a note to the history" style="flex:1" required><button class="btn ghost">Add note</button></form>
+    </div>
+    <div class="card">
+      <h2>Payment history</h2>
+      <ul class="ev">{% for e in o.events %}<li><span class="muted">{{ e.at[0:10] }} {{ e.at[11:19] }}</span> · <b>{{ e.kind|replace('_',' ') }}</b>{% if e.amount is not none %} · ${{ '%.2f' % e.amount }}{% endif %}{% if e.detail %}<br>{{ e.detail }}{% endif %}</li>{% endfor %}</ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

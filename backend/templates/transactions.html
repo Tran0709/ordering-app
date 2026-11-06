@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Transactions · 菜园子{% endblock %}
+{% block head %}
+<style>
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:16px}
+.filters label{display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--mute)}
+.quick{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.quick a{font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:14px;background:#fff;text-decoration:none;color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat small{display:block;color:var(--mute);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.stat b{font-size:22px}.stat.main{background:var(--g);color:#fff;border-color:var(--g)}.stat.main small{color:#d6eadb}
+.methods{display:flex;gap:8px;flex-wrap:wrap;margin:-4px 0 16px;font-size:13px}
+.methods span{background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px 10px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mute);background:#faf9f5}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr:hover td{background:#fbfaf6}
+.empty{text-align:center;color:var(--mute);padding:40px}
+@media (max-width:760px){
+  table,thead,tbody,tr,td{display:block}thead{display:none}
+  tr{border-bottom:1px solid var(--line);padding:10px 12px}td{border:0;padding:2px 0}
+  td.num{text-align:left}td[data-l]:before{content:attr(data-l) ": ";color:var(--mute);font-size:12px}
+}
+</style>
+{% endblock %}
+{% block body %}
+<h1>Transactions</h1>
+<div class="quick">
+  <a href="?">Today</a>
+  <a href="?from={{ d.yday }}&to={{ d.yday }}">Yesterday</a>
+  <a href="?from={{ d.week }}&to={{ d.today }}">Last 7 days</a>
+  <a href="?from={{ d.month }}&to={{ d.today }}">This month</a>
+  <a href="?status=pending">Awaiting payment</a>
+  <a href="?status=unpaid_cash">Cash to collect</a>
+</div>
+<form class="filters" method="get">
+  <label>From<input type="date" name="from" value="{{ f.from }}"></label>
+  <label>To<input type="date" name="to" value="{{ f.to }}"></label>
+  <label>Payment status<select name="status"><option value="">All</option>{% for k,v in STATUS_LABEL.items() %}<option value="{{k}}" {{ 'selected' if f.status==k }}>{{v}}</option>{% endfor %}</select></label>
+  <label>Method<select name="method"><option value="">All</option>{% for k,v in PAY_LABEL.items() %}<option value="{{k}}" {{ 'selected' if f.method==k }}>{{v}}</option>{% endfor %}</select></label>
+  <label>Search<input name="q" value="{{ f.q }}" placeholder="Order no., name, phone, payment ref"></label>
+  <button class="btn">Apply</button>
+  <a class="btn ghost" href="/staff/export.csv?{{ request.query_string.decode() }}">Download CSV</a>
+</form>
+
+<div class="stats">
+  <div class="stat main"><small>Paid takings</small><b>${{ '%.2f' % s.paid_total }}</b><div>{{ s.paid_count }} paid order{{ 's' if s.paid_count != 1 }}</div></div>
+  <div class="stat"><small>All orders</small><b>{{ s.orders }}</b></div>
+  <div class="stat"><small>Awaiting payment</small><b>${{ '%.2f' % s.pending }}</b></div>
+  <div class="stat"><small>Cash to collect</small><b>${{ '%.2f' % s.cash_due }}</b></div>
+  <div class="stat"><small>Refunded</small><b>${{ '%.2f' % s.refunded }}</b></div>
+  <div class="stat"><small>GST in paid (9%)</small><b>${{ '%.2f' % s.gst }}</b></div>
+</div>
+{% if s.by_method %}<div class="methods">{% for k,v in s.by_method.items() %}<span><b>{{ PAY_LABEL[k] }}</b> · {{ v.count }} · ${{ '%.2f' % v.total }}</span>{% endfor %}</div>{% endif %}
+
+<table>
+  <thead><tr><th>Order</th><th>Time</th><th>Customer</th><th>Type</th><th>Method</th><th>Payment</th><th>Kitchen</th><th class="num">Total</th></tr></thead>
+  <tbody>
+  {% for r in rows %}
+    <tr>
+      <td><a href="/staff/order/{{ r.id }}"><b>{{ r.id }}</b></a></td>
+      <td data-l="Time">{{ r.created_at[0:10] }} {{ r.created_at[11:16] }}</td>
+      <td data-l="Customer">{{ r.customer_name }}<br><span class="muted">{{ r.phone }}</span></td>
+      <td data-l="Type">{{ {'dine':'Dine-in','pickup':'Pickup','delivery':'Delivery'}[r.order_type] }}{% if r.table_no %} · T{{ r.table_no }}{% endif %}</td>
+      <td data-l="Method">{{ PAY_LABEL[r.pay_method] }}{% if r.provider_ref %}<br><span class="muted" style="font-size:12px">{{ r.provider_ref }}</span>{% endif %}</td>
+      <td><span class="badge b-{{ r.pay_status }}">{{ STATUS_LABEL[r.pay_status] }}</span></td>
+      <td><span class="badge b-k">{{ r.kitchen_status|capitalize }}</span></td>
+      <td class="num" data-l="Total"><b>${{ '%.2f' % r.total }}</b></td>
+    </tr>
+  {% else %}
+    <tr><td colspan="8" class="empty">No transactions for these filters.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p class="muted" style="font-size:13px">Times are Singapore time. This page refreshes every 30 seconds.</p>
+<script>setTimeout(()=>{if(!document.querySelector('input:focus,select:focus'))location.reload()},30000)</script>
+{% endblock %}
