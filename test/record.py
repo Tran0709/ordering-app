@@ -65,7 +65,7 @@ def desktop(br):
     p = ctx.new_page(); p.add_init_script(OVERLAY); p.goto(URL); p.evaluate("localStorage.clear()"); p.reload()
     p.wait_for_load_state("networkidle"); t = T(p, "DESKTOP 1280×800")
     t.cap("菜园子 online ordering — full desktop test run", 2500)
-    t.check(p.locator(".card").count() == 42, "Menu loaded: 42 dishes rendered")
+    t.check(p.locator(".card").count() == 40, "Menu loaded: 40 dishes rendered")
     broken = p.evaluate("[...document.images].filter(i=>i.complete&&!i.naturalWidth).length")
     t.cap("Header matches the printed menu: logo, gold slogan, green band, category tabs", 2500)
 
@@ -89,8 +89,8 @@ def desktop(br):
     t.click('.card:has-text("Steamed Sea Bass") .plus', pause=900)
 
     t.click('nav a[data-k="rice"]', pause=1200)
-    t.cap("Salted duck has size options — switching from Half 半只 to Whole 1只 changes the price", 1800)
-    duck = '.card:has-text("Salted Duck")'
+    t.cap("Spiced duck has size options — switching from Half 半只 to Whole 1只 changes the price", 1800)
+    duck = '.card:has-text("Dry-Pressed Duck")'
     before = p.locator(duck + " .price").inner_text()
     t.click(duck + ' .opts button >> nth=1', pause=900)
     after = p.locator(duck + " .price").inner_text()
@@ -134,10 +134,10 @@ def desktop(br):
     # --- run 2: member, pickup, PayNow
     t.scroll(-6000, 6); t.cap("Run 2 — member customer, pickup, pay with PayNow", 2000)
     t.click("#member", pause=1000)
-    t.check(p.locator(".price.member").count() > 40, "Member pricing on: MP 会员价 is now highlighted")
+    t.check(p.locator(".price.member").count() == 40, "Member pricing on: MP 会员价 is now highlighted")
     t.click('.card:has-text("Hunan Stir-Fried Pork") .plus', pause=500)
     t.click('.card:has-text("Hunan Stir-Fried Pork") .qty button >> nth=1', pause=500)
-    t.click('.card:has-text("Hot and Sour Chicken") .plus', pause=600)
+    t.click('.card:has-text("Old Ginger") .plus', pause=600)
     t.click(".cartbtn", pause=1000)
     t.check("member price" in p.locator("#df").inner_text(), "Cart subtotal uses member price")
     t.click("#df .big", pause=1000)
