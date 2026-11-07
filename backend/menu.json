@@ -24,7 +24,7 @@
   "id": "ybeef",
   "zh": "菜园子小炒黄牛肉",
   "en": "Cai Yuan Zi Stir-fried Yellow Beef",
-  "mp": 20.9,
+  "mp": 20.8,
   "up": 23.9,
   "section": "sig",
   "img": "cai-yuan-zi-stir-fried-yellow-beef"
@@ -39,13 +39,13 @@
   "img": "steamed-sea-bass-with-chili-sauce"
  },
  {
-  "id": "hschick",
-  "zh": "开胃酸辣鸡",
-  "en": "Hot and Sour Chicken",
-  "mp": 26.8,
-  "up": 28.9,
+  "id": "gingerchk",
+  "zh": "老姜小炒鸡",
+  "en": "Stir-fried Chicken with Old Ginger",
+  "mp": 18.8,
+  "up": 20.9,
   "section": "sig",
-  "img": "hot-and-sour-chicken"
+  "img": "stir-fried-chicken-with-old-ginger"
  },
  {
   "id": "fishhead",
@@ -87,19 +87,19 @@
   "id": "brisket",
   "zh": "番茄烧牛腩",
   "en": "Braised Beef Brisket with Tomato",
-  "mp": 20.9,
+  "mp": 20.8,
   "up": 23.9,
   "section": "garden",
   "img": "braised-beef-brisket-with-tomato"
  },
  {
-  "id": "clams",
-  "zh": "油泼花甲",
-  "en": "Sizzling Clams with Hot Oil",
-  "mp": 20.8,
-  "up": 22.9,
+  "id": "sourfish",
+  "zh": "金汤酸菜鱼",
+  "en": "Sour Fish in Golden Broth",
+  "mp": 32.8,
+  "up": 35.9,
   "section": "garden",
-  "img": "sizzling-clams-with-hot-oil"
+  "img": "sour-fish-in-golden-broth"
  },
  {
   "id": "egg",
@@ -120,38 +120,38 @@
   "img": "camellia-oil-chili"
  },
  {
-  "id": "okra",
-  "zh": "捞汁秋葵",
-  "en": "Okra in Savory Sauce",
-  "mp": 9.8,
-  "up": 11.9,
+  "id": "cucumber",
+  "zh": "刀拍黄瓜",
+  "en": "Smashed Cucumber",
+  "mp": 7.8,
+  "up": 9.9,
   "section": "cold",
-  "img": "okra-in-savory-sauce"
+  "img": "smashed-cucumber"
  },
  {
-  "id": "tripe",
-  "zh": "油泼葱油肚丝",
-  "en": "Braised Pork Tripe Slices",
-  "mp": 22.8,
-  "up": 25.9,
+  "id": "veggs",
+  "zh": "网红醋溜蛋",
+  "en": "Vinegar-Braised Eggs",
+  "mp": 13.8,
+  "up": 15.9,
   "section": "rice",
-  "img": "braised-pork-tripe-slices",
+  "img": "vinegar-braised-eggs",
   "badge": "下饭<br>必点"
  },
  {
-  "id": "ribs",
-  "zh": "捞菜排骨",
-  "en": "Braised Pork Ribs with Pickled Vegetables",
-  "mp": 22.8,
-  "up": 25.9,
+  "id": "spshrimp",
+  "zh": "椒盐香辣虾",
+  "en": "Salt & Pepper Spicy Shrimp",
+  "mp": 24.8,
+  "up": 26.9,
   "section": "rice",
-  "img": "braised-pork-ribs-with-pickled-vegetables",
+  "img": "salt-and-pepper-spicy-shrimp",
   "badge": "特色<br>推荐"
  },
  {
   "id": "duck",
-  "zh": "老长沙酱板鸭",
-  "en": "Old Changsha Spiced Salted Duck",
+  "zh": "菜园子酱板鸭",
+  "en": "Caiyuanzi Spiced Dry-Pressed Duck",
   "mp": 17.8,
   "up": 18.9,
   "section": "rice",
@@ -179,13 +179,13 @@
   "img": "stir-fried-dried-radish-with-preserved-pork"
  },
  {
-  "id": "shrimpsk",
-  "zh": "香辣串烧虾",
-  "en": "Spicy Grilled Shrimp Skewers",
-  "mp": 24.8,
-  "up": 26.9,
+  "id": "bullfrog",
+  "zh": "香辣跳跳蛙",
+  "en": "Spicy Bullfrog",
+  "mp": 29.8,
+  "up": 32.9,
   "section": "rice",
-  "img": "spicy-grilled-shrimp-skewers"
+  "img": "spicy-bullfrog"
  },
  {
   "id": "liver",
@@ -217,13 +217,13 @@
   "hero": 1
  },
  {
-  "id": "lotus",
-  "zh": "香煎藕夹",
-  "en": "Pan-fried Lotus Root",
+  "id": "cornshrimp",
+  "zh": "玉米青豆滑虾仁",
+  "en": "Tender Shrimp with Corn and Green Peas",
   "mp": 17.8,
   "up": 19.9,
   "section": "chef",
-  "img": "pan-fried-lotus-root"
+  "img": "tender-shrimp-with-corn-and-green-peas"
  },
  {
   "id": "trotter",
@@ -235,22 +235,22 @@
   "img": "braised-pork-trotters-with-preserved-mustard-greens"
  },
  {
-  "id": "culter",
-  "zh": "大白刁",
-  "en": "Grilled White Culter Fish",
-  "mp": 29,
-  "up": 32,
+  "id": "noodles",
+  "zh": "酸包菜炒米粉",
+  "en": "Stir-fried Rice Noodles with Sour Cabbage",
+  "mp": 12.8,
+  "up": 13.9,
   "section": "chef",
-  "img": "grilled-white-culter-fish"
+  "img": "stir-fried-rice-noodles-with-sour-cabbage"
  },
  {
-  "id": "antler",
-  "zh": "干锅鹿茸菇",
-  "en": "Dry Pot Pilose Antler Mushrooms",
+  "id": "curedmush",
+  "zh": "干锅腊肉鹿茸菇",
+  "en": "Dry Pot Cured Pork with Velvet Mushrooms",
   "mp": 22.9,
   "up": 23.8,
   "section": "chef",
-  "img": "dry-pot-deer-antler-mushrooms"
+  "img": "dry-pot-cured-pork-with-velvet-mushrooms"
  },
  {
   "id": "gshrimp",
@@ -262,13 +262,13 @@
   "img": "garlic-shrimp-with-vermicelli"
  },
  {
-  "id": "cabbage",
-  "zh": "蒜蓉粉丝娃娃菜",
-  "en": "Baby Cabbage with Garlic & Vermicelli",
-  "mp": 15.8,
-  "up": 16.9,
+  "id": "culter",
+  "zh": "大白刁",
+  "en": "Grilled White Culter Fish",
+  "mp": 29,
+  "up": 32,
   "section": "steam",
-  "img": "baby-cabbage-with-garlic-and-vermicelli"
+  "img": "grilled-white-culter-fish"
  },
  {
   "id": "segg",
@@ -287,16 +287,6 @@
   "up": 19.9,
   "section": "soup",
   "img": "fresh-kelp-meatball-soup"
- },
- {
-  "id": "csoup",
-  "zh": "虫草花老鸡汤",
-  "en": "Old Chicken Soup with Cordyceps Flowers",
-  "mp": 11.8,
-  "up": 13.9,
-  "section": "soup",
-  "img": "old-chicken-soup-with-cordyceps-flowers",
-  "note": "per person 位"
  },
  {
   "id": "lsoup",
@@ -344,13 +334,13 @@
   "img": "homemade-zucchini"
  },
  {
-  "id": "beans",
-  "zh": "大碗四季豆",
-  "en": "Large Bowl Sautéed Kidney Beans",
-  "mp": 13.8,
-  "up": 14.9,
+  "id": "lstem",
+  "zh": "小炒莴笋丝",
+  "en": "Stir-fried Shredded Lettuce Stem",
+  "mp": 12.8,
+  "up": 13.9,
   "section": "veg",
-  "img": "large-bowl-sauteed-kidney-beans"
+  "img": "stir-fried-shredded-lettuce-stem"
  },
  {
   "id": "potato",
@@ -363,22 +353,13 @@
   "note": "清炒 plain stir-fry available"
  },
  {
-  "id": "melon",
-  "zh": "青椒炒苦瓜",
-  "en": "Bitter Melon Stir-Fried with Green Peppers",
-  "mp": 12.8,
-  "up": 14.9,
+  "id": "sprouts",
+  "zh": "韭菜胖豆芽",
+  "en": "Stir-fried Bean Sprouts with Chinese Chives",
+  "mp": 11.8,
+  "up": 13.9,
   "section": "veg",
-  "img": "bitter-melon-stir-fried-with-green-peppers"
- },
- {
-  "id": "eggplant",
-  "zh": "肉沫茄子煲",
-  "en": "Minced Pork Eggplant Casserole",
-  "mp": 14.8,
-  "up": 15.9,
-  "section": "veg",
-  "img": "minced-pork-eggplant-casserole"
+  "img": "stir-fried-bean-sprouts-with-chinese-chives"
  },
  {
   "id": "ricecake",
@@ -402,7 +383,7 @@
  },
  {
   "id": "tiger",
-  "zh": "虎牌啤酒 490ml",
+  "zh": "虎牌啤酒",
   "en": "Tiger Beer",
   "mp": 8.6,
   "up": 8.6,

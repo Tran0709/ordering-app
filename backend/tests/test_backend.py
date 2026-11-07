@@ -37,7 +37,7 @@ def login(c):
 def test_menu(tmp_path):
     _, c = make(tmp_path)
     j = c.get("/api/menu").get_json()
-    assert len(j["items"]) == 53 and j["open"] is True
+    assert len(j["items"]) == 51 and j["open"] is True
 
 
 def test_server_prices_ignore_browser(tmp_path):
