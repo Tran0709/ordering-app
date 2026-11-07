@@ -36,7 +36,7 @@ main{max-width:1240px;margin:auto;padding:0 16px 120px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:4px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
 .card .ph{aspect-ratio:4/3;background:#ddd;position:relative}
-.card .ph img{width:100%;height:100%;object-fit:cover}
+.card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .badge{position:absolute;left:8px;top:8px;background:radial-gradient(#fbe7a6,#d7a83d);color:#7a2a10;font-weight:800;font-size:12px;border-radius:50%;width:48px;height:48px;display:grid;place-items:center;text-align:center;line-height:1.1;border:2px solid #fff;box-shadow:0 1px 4px #0005}
 .info{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
 .row{display:flex;justify-content:space-between;gap:8px}
@@ -97,6 +97,9 @@ input,textarea,select{width:100%;padding:10px;border:1px solid var(--line);borde
 .hint{font-size:12px;color:var(--mute);margin-top:6px}
 .qr{width:180px;height:180px;margin:10px auto;display:block;border:8px solid #fff;outline:2px solid #7b2d8e;border-radius:6px}
 .err{color:var(--red);font-size:13px;margin-top:6px}
+.hours{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 12px;color:var(--ink)}
+.pill{font-weight:800;font-size:12px;padding:2px 10px;border-radius:12px;color:#fff;background:var(--g)}.pill.closed{background:var(--red)}
+.closedmsg{background:#fdecea;color:var(--red);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
 .empty{text-align:center;color:var(--mute);padding:40px 0}
 .ok{text-align:center;padding:20px 0}.ok .tick{font-size:56px;color:var(--g)}
 footer{background:var(--g);color:#fff;text-align:center;padding:24px 16px 100px;font-size:14px}
@@ -128,6 +131,7 @@ footer b{color:var(--gold)}
 </header>
 <div class="bar">
   <label class="toggle"><input type="checkbox" id="member" style="width:auto"> I'm a member — use <b>MP 会员价</b></label>
+  <span class="hours">🕒 Ordering hours: <b>11:30am – 2:30pm</b> · <b>5:30pm – 9:30pm</b> <span id="openpill" class="pill"></span></span>
   <span>Prices in SGD. U.P = regular price.</span>
 </div>
 <main id="menu"></main>
@@ -163,50 +167,48 @@ const S = {
 const M = [
  ["hunan","湖南小炒肉","Hunan Stir-Fried Pork",18.8,20.9,"sig","hunan-stir-fried-pork",{badge:"桌桌<br>必点",hero:1}],
  ["lemon","手打柠檬茶","Handcrafted Fresh Lemon Tea",3.9,3.9,"sig","handcrafted-fresh-lemon-tea",{note:"解腻解辣最佳搭档"}],
- ["ybeef","菜园子小炒黄牛肉","Cai Yuan Zi Stir-fried Yellow Beef",20.9,23.9,"sig","cai-yuan-zi-stir-fried-yellow-beef"],
+ ["ybeef","菜园子小炒黄牛肉","Cai Yuan Zi Stir-fried Yellow Beef",20.8,23.9,"sig","cai-yuan-zi-stir-fried-yellow-beef"],
  ["bass","跳水鲈鱼","Steamed Sea Bass with Chili Sauce",32.8,35.9,"sig","steamed-sea-bass-with-chili-sauce"],
- ["hschick","开胃酸辣鸡","Hot and Sour Chicken",26.8,28.9,"sig","hot-and-sour-chicken"],
+ ["gingerchk","老姜小炒鸡","Stir-fried Chicken with Old Ginger",18.8,20.9,"sig","stir-fried-chicken-with-old-ginger"],
  ["fishhead","菜园子剁椒鱼头","CaiYuanZi Steamed Fish Head with Chopped Chili",18.8,20.9,"garden","cai-yuan-zi-steamed-fish-head-with-chopped-chili"],
  ["eel","爆炒鳝鱼","Stir-fried Eel",36.8,38.9,"garden","stir-fried-eel"],
  ["tofu","红烧豆腐煲","Braised Tofu in Clay Pot",15.9,18.9,"garden","braised-tofu-in-clay-pot"],
  ["feet","蒜香凤爪","Garlic Chicken Feet",17.8,19.8,"garden","garlic-chicken-feet"],
- ["brisket","番茄烧牛腩","Braised Beef Brisket with Tomato",20.9,23.9,"garden","braised-beef-brisket-with-tomato"],
- ["clams","油泼花甲","Sizzling Clams with Hot Oil",20.8,22.9,"garden","sizzling-clams-with-hot-oil"],
+ ["brisket","番茄烧牛腩","Braised Beef Brisket with Tomato",20.8,23.9,"garden","braised-beef-brisket-with-tomato"],
+ ["sourfish","金汤酸菜鱼","Sour Fish in Golden Broth",32.8,35.9,"garden","sour-fish-in-golden-broth"],
  ["egg","擂辣椒皮蛋","Mashed Green Peppers with Preserved Egg",9.8,11.9,"cold","mashed-green-peppers-with-preserved-egg"],
  ["camellia","茶油辣椒","Chili in Camellia Oil",8.8,9.9,"cold","camellia-oil-chili"],
- ["okra","捞汁秋葵","Okra in Savory Sauce",9.8,11.9,"cold","okra-in-savory-sauce"],
- ["tripe","油泼葱油肚丝","Braised Pork Tripe Slices",22.8,25.9,"rice","braised-pork-tripe-slices",{badge:"下饭<br>必点"}],
- ["ribs","捞菜排骨","Braised Pork Ribs with Pickled Vegetables",22.8,25.9,"rice","braised-pork-ribs-with-pickled-vegetables",{badge:"特色<br>推荐"}],
- ["duck","老长沙酱板鸭","Old Changsha Spiced Salted Duck",17.8,18.9,"rice","old-changsha-spiced-salted-duck",{opts:[["Half 半只",17.8,18.9],["Whole 1只",29.9,32.8]]}],
+ ["cucumber","刀拍黄瓜","Smashed Cucumber",7.8,9.9,"cold","smashed-cucumber"],
+ ["veggs","网红醋溜蛋","Vinegar-Braised Eggs",13.8,15.9,"rice","vinegar-braised-eggs",{badge:"下饭<br>必点"}],
+ ["spshrimp","椒盐香辣虾","Salt & Pepper Spicy Shrimp",24.8,26.9,"rice","salt-and-pepper-spicy-shrimp",{badge:"特色<br>推荐"}],
+ ["duck","菜园子酱板鸭","Caiyuanzi Spiced Dry-Pressed Duck",17.8,18.9,"rice","old-changsha-spiced-salted-duck",{opts:[["Half 半只",17.8,18.9],["Whole 1只",29.9,32.8]]}],
  ["radish","萝卜干炒腊肉","Stir-fried Dried Radish with Preserved Pork",22.8,23.9,"rice","stir-fried-dried-radish-with-preserved-pork"],
- ["shrimpsk","香辣串烧虾","Spicy Grilled Shrimp Skewers",24.8,26.9,"rice","spicy-grilled-shrimp-skewers"],
+ ["bullfrog","香辣跳跳蛙","Spicy Bullfrog",29.8,32.9,"rice","spicy-bullfrog"],
  ["liver","土匪猪肝","Bandit-Style Sautéed Pork Liver",18.8,20.9,"rice","bandit-style-sauteed-pork-liver"],
  ["squid","干锅鱿鱼须","Dry Pot Squid Tentacles",18.8,21.9,"rice","dry-pot-squid-tentacles"],
  ["fhtofu","鱼头豆腐煲","Fish Head & Tofu Casserole",18.8,20.9,"chef","fish-head-and-tofu-casserole",{badge:"特色<br>必点",hero:1}],
- ["lotus","香煎藕夹","Pan-fried Lotus Root",17.8,19.9,"chef","pan-fried-lotus-root"],
+ ["cornshrimp","玉米青豆滑虾仁","Tender Shrimp with Corn and Green Peas",17.8,19.9,"chef","tender-shrimp-with-corn-and-green-peas"],
  ["trotter","梅干菜烧猪蹄","Braised Pork Trotters with Preserved Mustard Greens",27.8,29.9,"chef","braised-pork-trotters-with-preserved-mustard-greens"],
- ["culter","大白刁","Grilled White Culter Fish",29,32,"chef","grilled-white-culter-fish"],
- ["antler","干锅鹿茸菇","Dry Pot Pilose Antler Mushrooms",22.9,23.8,"chef","dry-pot-deer-antler-mushrooms"],
+ ["noodles","酸包菜炒米粉","Stir-fried Rice Noodles with Sour Cabbage",12.8,13.9,"chef","stir-fried-rice-noodles-with-sour-cabbage"],
+ ["curedmush","干锅腊肉鹿茸菇","Dry Pot Cured Pork with Velvet Mushrooms",22.9,23.8,"chef","dry-pot-cured-pork-with-velvet-mushrooms"],
  ["gshrimp","蒜蓉粉丝虾","Garlic Shrimp with Vermicelli",18.8,20.9,"steam","garlic-shrimp-with-vermicelli"],
- ["cabbage","蒜蓉粉丝娃娃菜","Baby Cabbage with Garlic & Vermicelli",15.8,16.9,"steam","baby-cabbage-with-garlic-and-vermicelli"],
+ ["culter","大白刁","Grilled White Culter Fish",29,32,"steam","grilled-white-culter-fish"],
  ["segg","肉沫蒸蛋","Steamed Egg with Minced Pork",11.8,13.9,"steam","steamed-egg-with-minced-pork"],
  ["kelp","鲜海带肉丸汤","Fresh Kelp Meatball Soup",17.8,19.9,"soup","fresh-kelp-meatball-soup"],
- ["csoup","虫草花老鸡汤","Old Chicken Soup with Cordyceps Flowers",11.8,13.9,"soup","old-chicken-soup-with-cordyceps-flowers",{note:"per person 位"}],
  ["lsoup","湖藕筒子骨汤","Lotus Root & Pork Knuckle Soup",21.8,23.9,"soup","lotus-root-and-pork-knuckle-soup"],
  ["cauli","大碗花菜","Large Bowl Braised Cauliflower",13.8,14.9,"veg","large-bowl-braised-cauliflower"],
  ["lettuce","油麦菜","Sautéed Leaf Lettuce",11.8,13.9,"veg","sauteed-leaf-lettuce"],
  ["scab","手撕包菜","Shredded Cabbage Stir-Fry",12.8,13.9,"veg","shredded-cabbage-stir-fry"],
  ["zucc","家常丝瓜","Homemade Zucchini",12.8,14.9,"veg","homemade-zucchini"],
- ["beans","大碗四季豆","Large Bowl Sautéed Kidney Beans",13.8,14.9,"veg","large-bowl-sauteed-kidney-beans"],
+ ["lstem","小炒莴笋丝","Stir-fried Shredded Lettuce Stem",12.8,13.9,"veg","stir-fried-shredded-lettuce-stem"],
  ["potato","酸辣土豆丝","Sour & Spicy Shredded Potatoes",12.8,14.9,"veg","sour-and-spicy-shredded-potatoes",{note:"清炒 plain stir-fry available"}],
- ["melon","青椒炒苦瓜","Bitter Melon Stir-Fried with Green Peppers",12.8,14.9,"veg","bitter-melon-stir-fried-with-green-peppers"],
- ["eggplant","肉沫茄子煲","Minced Pork Eggplant Casserole",14.8,15.9,"veg","minced-pork-eggplant-casserole"],
+ ["sprouts","韭菜胖豆芽","Stir-fried Bean Sprouts with Chinese Chives",11.8,13.9,"veg","stir-fried-bean-sprouts-with-chinese-chives"],
  ["ricecake","糖油粑粑","Sugar Oil Glutinous Rice Cakes",10.8,11.9,"dim","sugar-oil-glutinous-rice-cakes",{note:"6 pcs 六个一份"}],
  ["pumpkin","南瓜饼","Pumpkin Pancakes",11.8,12.9,"dim","pumpkin-pancakes",{note:"6 pcs 六个一份"}],
 ];
 // beverages: [id, 中文, English, price, group, slug]
 const D = [
- ["tiger","虎牌啤酒 490ml","Tiger Beer",8.6,"啤酒 Beer","tiger-beer"],
+ ["tiger","虎牌啤酒","Tiger Beer",8.6,"啤酒 Beer","tiger-beer"],
  ["carls","皇帽啤酒","Carlsberg",9.6,"啤酒 Beer","carlsberg-beer"],
  ["tsing","青岛啤酒","Tsingtao Beer",9,"啤酒 Beer","tsingtao-beer"],
  ["wusu","乌苏啤酒","Wusu Beer",9,"啤酒 Beer","wusu-beer"],
@@ -287,10 +289,19 @@ function drawCart(){const c=calc(),keys=Object.keys(cart);$("#dtitle").textConte
   $("#db").innerHTML=keys.length?keys.map(k=>{const m=byId[k.split("|")[0]];return `<div class="line"><img src="img/${m[6]}.jpg" alt=""><div class="t"><b>${m[1]} ${label(k)}</b><span class="en">${m[2]}</span><div>${money(unit(k))}</div></div>${ctrl(k)}</div>`}).join("")
    +`<label class="f" for="rem">Notes for the kitchen (spice level, allergies)</label><textarea id="rem" rows="2" placeholder="e.g. less spicy, no coriander">${notes}</textarea>`
    :`<div class="empty">Your cart is empty.<br>Add some Hunan favourites!</div>`;
-  $("#df").innerHTML=keys.length?sums(c)+`<button class="big" onclick="toCheckout()">Checkout</button>`:`<button class="big ghost" onclick="closeCart()">Browse menu</button>`;
+  $("#df").innerHTML=keys.length?sums(c)+(openWin()?`<button class="big" onclick="toCheckout()">Checkout</button>`:closedHTML()+`<button class="big" disabled>Checkout</button>`):`<button class="big ghost" onclick="closeCart()">Browse menu</button>`;
   const r=$("#rem");if(r)r.oninput=e=>notes=e.target.value}
 let notes="",form={name:"",phone:"",table:"",addr:"",time:"asap",cn:"",ce:"",cc:""};
-function toCheckout(){step="checkout";drawCheckout()}
+// ordering hours, Singapore time (minutes after midnight)
+const HOURS=[[690,870],[1050,1290]];
+const tOverride=new URLSearchParams(location.search).get("now"); // e.g. ?now=15:00 for testing
+function sgNow(){if(tOverride){const [h,m]=tOverride.split(":").map(Number);return h*60+m}const d=new Date(Date.now()+8*3600e3);return d.getUTCHours()*60+d.getUTCMinutes()}
+function hm(m){const h=Math.floor(m/60),mm=m%60;return `${(h+11)%12+1}:${String(mm).padStart(2,"0")}${h<12?"am":"pm"}`}
+function openWin(){const n=sgNow();return HOURS.find(([a,b])=>n>=a&&n<b)}
+function nextOpen(){const n=sgNow(),w=HOURS.find(([a])=>a>n);return w?hm(w[0])+" today":hm(HOURS[0][0])+" tomorrow"}
+function showHours(){const w=openWin(),el=$("#openpill");el.className="pill"+(w?"":" closed");el.textContent=w?"Open now · until "+hm(w[1]):"Closed · opens "+nextOpen()}
+function closedHTML(){return `<div class="closedmsg">Online ordering is closed right now. We take orders 11:30am – 2:30pm and 5:30pm – 9:30pm. Next opening: <b>${nextOpen()}</b>.</div>`}
+function toCheckout(){if(!openWin())return drawCart();step="checkout";drawCheckout()}
 function drawCheckout(err){const c=calc();$("#dtitle").textContent="Checkout";
   const pm=PAYS.filter(p=>!(p[0]==="cash"&&orderType==="delivery"));if(!pm.find(p=>p[0]===pay))pay="paynow";
   $("#db").innerHTML=`
@@ -301,7 +312,7 @@ function drawCheckout(err){const c=calc();$("#dtitle").textContent="Checkout";
    <label class="f" for="fp">Mobile number</label><input id="fp" value="${form.phone}" inputmode="tel" autocomplete="tel" placeholder="8XXX XXXX">
    ${orderType==="dine"?`<label class="f" for="ft">Table number</label><input id="ft" value="${form.table}" inputmode="numeric">`:""}
    ${orderType==="delivery"?`<label class="f" for="fa">Delivery address</label><textarea id="fa" rows="2" autocomplete="street-address">${form.addr}</textarea>`:""}
-   ${orderType!=="dine"?`<label class="f" for="fw">${orderType==="pickup"?"Pickup":"Delivery"} time</label><select id="fw"><option value="asap">As soon as possible</option>${slots().map(s=>`<option ${form.time===s?"selected":""}>${s}</option>`).join("")}</select>`:""}
+   ${orderType!=="dine"?`<label class="f" for="fw">${orderType==="pickup"?"Pickup":"Delivery"} time</label><select id="fw"><option value="asap">As soon as possible (about 30 min)</option>${slots().map(s=>`<option ${form.time===s?"selected":""}>${s}</option>`).join("")}</select>`:""}
   </fieldset>
   <fieldset><legend>Payment method</legend><div class="pays">
    ${pm.map(p=>`<button class="pick ${pay===p[0]?"on":""}" onclick="setPay('${p[0]}')"><span class="ic" style="background:${p[3]}">${p[4]}</span><span><b>${p[1]}</b><br><span class="hint">${p[2]}</span></span></button>`).join("")}
@@ -312,8 +323,9 @@ function drawCheckout(err){const c=calc();$("#dtitle").textContent="Checkout";
 function keep(){const v=id=>$(id)?$(id).value:undefined;form.name=v("#fn")??form.name;form.phone=v("#fp")??form.phone;form.table=v("#ft")??form.table;form.addr=v("#fa")??form.addr;form.time=v("#fw")??form.time;form.cn=v("#cn")??form.cn;form.ce=v("#ce")??form.ce;form.cc=v("#cc")??form.cc}
 function setType(t){keep();orderType=t;drawCheckout()}
 function setPay(p){keep();pay=p;drawCheckout()}
-function slots(){const out=[],d=new Date();d.setMinutes(Math.ceil((d.getMinutes()+30)/15)*15,0,0);for(let i=0;i<12;i++){out.push(d.toTimeString().slice(0,5));d.setMinutes(d.getMinutes()+15)}return out}
+function slots(){const out=[];let t=Math.ceil((sgNow()+30)/15)*15;for(const [a,b] of HOURS){for(let m=Math.max(t,a);m<=b;m+=15)out.push(hm(m))}return out}
 function placeOrder(){keep();
+  if(!openWin()){step="cart";return drawCart()}
   if(!form.name.trim())return drawCheckout("Please enter your name.");
   if(!/^[689]\d{7}$/.test(form.phone.replace(/\D/g,"").replace(/^65/,"")))return drawCheckout("Please enter a valid Singapore mobile number.");
   if(orderType==="dine"&&!form.table.trim())return drawCheckout("Please enter your table number.");
@@ -334,7 +346,7 @@ function qrSVG(seed){let h=0;for(const ch of seed)h=(h*31+ch.charCodeAt(0))>>>0;
     const on=f?(x%18===0||x%18===6||y%18===0||y%18===6||(x%18>1&&x%18<5&&y%18>1&&y%18<5)):(h>>16)&1;if(on)r+=`<rect x="${x}" y="${y}" width="1" height="1"/>`}
   return `<svg class="qr" viewBox="0 0 ${n} ${n}" fill="#111">${r}</svg>`}
 
-render();
+render();showHours();setInterval(()=>{showHours();if(document.body.classList.contains("open")&&step==="cart")drawCart()},60e3);
 </script>
 </body>
 </html>
