@@ -185,3 +185,11 @@ def test_order_numbers_count_up_per_day(tmp_path):
     _, c = make(tmp_path)
     ids = [c.post("/api/orders", json=ORDER).get_json()["order_id"] for _ in range(3)]
     assert ids == ["CYZ-20261106-0001", "CYZ-20261106-0002", "CYZ-20261106-0003"]
+
+
+def test_page_css_and_js_are_served(tmp_path):
+    _, c = make(tmp_path)
+    page = c.get("/").get_data(as_text=True)
+    assert '/css/order.css' in page and '/js/order.js' in page and "<style>" not in page
+    assert c.get("/css/order.css").status_code == 200 and c.get("/js/order.js").status_code == 200
+    assert c.get("/js/../app.py").status_code == 404

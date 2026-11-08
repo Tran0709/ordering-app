@@ -1,0 +1,113 @@
+/* 菜园子 online ordering – styles */
+:root{--g:#1f7a34;--gd:#145a25;--gold:#f3d27a;--ink:#1d1d1b;--mute:#6b6b66;--bg:#f6f4ee;--card:#fff;--line:#e6e2d6;--red:#c8281e}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink)}
+button{font:inherit;cursor:pointer}
+img{display:block;max-width:100%}
+/* header – green band like the printed menu */
+header{position:sticky;top:0;z-index:20;background:linear-gradient(#24883b,var(--g));color:#fff;box-shadow:0 2px 8px #0003}
+.top{display:flex;align-items:center;gap:16px;max-width:1240px;margin:auto;padding:10px 16px}
+.logo{background:#fff;border-radius:8px;padding:4px 8px;height:48px;display:flex;align-items:center}
+.logo img{height:40px;width:auto}
+.slogan{flex:1;min-width:0}
+.slogan b{display:block;color:var(--gold);font-size:20px;letter-spacing:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.slogan span{font-family:Georgia,serif;font-size:13px;opacity:.9}
+.cartbtn{background:var(--gold);color:var(--gd);border:0;border-radius:24px;padding:10px 16px;font-weight:700;display:flex;gap:8px;align-items:center;white-space:nowrap}
+.cartbtn i{font-style:normal;background:var(--red);color:#fff;border-radius:12px;padding:0 7px;font-size:13px}
+nav{display:flex;gap:6px;overflow-x:auto;max-width:1240px;margin:auto;padding:0 16px 10px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;color:#fff;text-decoration:none;font-size:14px;padding:6px 12px;border:1px solid #ffffff55;border-radius:16px}
+nav a.on{background:#fff;color:var(--g)}
+.bar{max-width:1240px;margin:12px auto 0;padding:0 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-size:14px;color:var(--mute)}
+.toggle{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 12px;color:var(--ink)}
+main{max-width:1240px;margin:auto;padding:0 16px 120px}
+/* section banner like "菜园子拿手菜 Garden Signature Dish" */
+.sec{scroll-margin-top:130px;margin-top:28px}
+.banner{display:flex;justify-content:space-between;align-items:flex-end;background:linear-gradient(180deg,var(--g) 0 62%,#fff 100%);border-radius:6px 6px 0 0;padding:10px 16px 14px}
+.banner h2{margin:0;font-size:28px;color:#fff;letter-spacing:3px;text-shadow:2px 2px 0 var(--gd),-1px -1px 0 #3aa152}
+.banner em{font-family:Georgia,serif;font-style:normal;color:#fff;text-align:right;font-size:16px;text-shadow:1px 1px 2px #0006;max-width:50%}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.card .ph{aspect-ratio:4/3;background:#ddd;position:relative}
+.card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;left:8px;top:8px;background:radial-gradient(#fbe7a6,#d7a83d);color:#7a2a10;font-weight:800;font-size:12px;border-radius:50%;width:48px;height:48px;display:grid;place-items:center;text-align:center;line-height:1.1;border:2px solid #fff;box-shadow:0 1px 4px #0005}
+.info{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.row{display:flex;justify-content:space-between;gap:8px}
+.zh{font-weight:800;font-size:18px}
+.en{font-family:Georgia,serif;font-size:12.5px;color:var(--mute)}
+.price{text-align:right;line-height:1.1;white-space:nowrap}
+.price .mp{font-family:Georgia,serif;font-weight:700;font-size:19px}
+.price small{display:block;font-size:10px;font-weight:700;color:var(--mute)}
+.price .up{font-family:Georgia,serif;font-size:14px;margin-top:4px}
+.price.member .up{color:var(--mute)} .price:not(.member) .mp{color:var(--mute);font-size:15px}
+.price:not(.member) .up{font-weight:700;font-size:19px;color:var(--ink)}
+.opts{display:flex;gap:6px}
+.opts button{flex:1;border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px;font-size:13px}
+.opts button.on{border-color:var(--g);background:#e8f3ea;color:var(--g);font-weight:700}
+.add{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.add .note{font-size:12px;color:var(--mute)}
+.plus{background:var(--g);color:#fff;border:0;border-radius:20px;padding:7px 14px;font-weight:700}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:30px;height:30px;border-radius:50%;border:1px solid var(--g);background:#fff;color:var(--g);font-weight:800}
+/* hero (signature) */
+.hero{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-top:4px}
+.hero .card .ph{aspect-ratio:16/9}
+.hero .zh{font-size:24px}
+/* drinks table like the printed beverages box */
+.drinks{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:4px}
+.dcol{background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px}
+.dcol h3{margin:0 0 8px;text-align:center;color:var(--g)}
+.drow{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px dashed var(--line)}
+.drow img{width:44px;height:44px;object-fit:contain;border-radius:4px;background:#f3f3f3}
+.drow .t{flex:1;min-width:0}.drow .t b{display:block;font-size:15px}
+.drow .p{font-family:Georgia,serif;font-weight:700}
+/* drawer */
+.scrim{position:fixed;inset:0;background:#0006;z-index:40;display:none}
+.drawer{position:fixed;z-index:50;background:#fff;display:flex;flex-direction:column;transition:transform .25s;right:0;top:0;bottom:0;width:420px;max-width:100%;transform:translateX(100%)}
+.open .scrim{display:block}.open .drawer{transform:none}
+.dh{background:var(--g);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.dh h3{margin:0}.dh button{background:none;border:0;color:#fff;font-size:24px}
+.db{flex:1;overflow:auto;padding:12px 16px}
+.df{border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+.line{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.line img{width:56px;height:56px;object-fit:cover;border-radius:6px}
+.line .t{flex:1;min-width:0;font-size:14px}.line .t b{display:block}
+.sum{display:flex;justify-content:space-between;font-size:14px;margin:4px 0}.sum.tot{font-size:18px;font-weight:800}
+.big{width:100%;background:var(--g);color:#fff;border:0;border-radius:8px;padding:14px;font-size:16px;font-weight:700;margin-top:8px}
+.big:disabled{opacity:.5}
+.ghost{background:#fff;color:var(--g);border:1px solid var(--g)}
+fieldset{border:0;padding:0;margin:0 0 16px}
+legend{font-weight:800;margin-bottom:8px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.pick{border:1.5px solid var(--line);border-radius:8px;padding:10px;background:#fff;text-align:left;display:flex;gap:10px;align-items:center}
+.pick.on{border-color:var(--g);background:#eef7f0}
+.pick .ic{width:36px;height:24px;border-radius:4px;display:grid;place-items:center;font-size:11px;font-weight:800;color:#fff;flex:none}
+.seg .pick{justify-content:center;text-align:center}
+.pays{display:grid;gap:6px}
+label.f{display:block;font-size:13px;margin:8px 0 4px;color:var(--mute)}
+input,textarea,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:6px;font:inherit;background:#fff}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hint{font-size:12px;color:var(--mute);margin-top:6px}
+.qr{width:180px;height:180px;margin:10px auto;display:block;border:8px solid #fff;outline:2px solid #7b2d8e;border-radius:6px}
+.err{color:var(--red);font-size:13px;margin-top:6px}
+.hours{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 12px;color:var(--ink)}
+.pill{font-weight:800;font-size:12px;padding:2px 10px;border-radius:12px;color:#fff;background:var(--g)}.pill.closed{background:var(--red)}
+.closedmsg{background:#fdecea;color:var(--red);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.empty{text-align:center;color:var(--mute);padding:40px 0}
+.ok{text-align:center;padding:20px 0}.ok .tick{font-size:56px;color:var(--g)}
+footer{background:var(--g);color:#fff;text-align:center;padding:24px 16px 100px;font-size:14px}
+footer b{color:var(--gold)}
+.fab{display:none}
+@media (max-width:720px){
+  .slogan{display:none}.top{justify-content:space-between}
+  .cartbtn{display:none}
+  .fab{display:flex;position:fixed;left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:30;justify-content:space-between;align-items:center;background:var(--g);color:#fff;border:0;border-radius:28px;padding:14px 20px;font-weight:700;box-shadow:0 4px 16px #0004}
+  .fab.hide{display:none}
+  .hero{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .zh{font-size:15px}.en{font-size:11px}.price .mp,.price:not(.member) .up{font-size:16px}
+  .info{padding:8px}.row{flex-direction:column;gap:4px}.price{text-align:left;display:flex;gap:10px;align-items:baseline}
+  .price .up{margin:0}
+  .banner h2{font-size:22px}.banner em{font-size:13px}
+  .drawer{top:auto;width:100%;height:92vh;border-radius:16px 16px 0 0;transform:translateY(100%)}
+}

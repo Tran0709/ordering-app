@@ -96,9 +96,9 @@ def create_app(overrides=None):
     def home():
         return send_from_directory(os.path.join(HERE, "static"), "index.html")
 
-    @app.get("/img/<path:name>")
-    def img(name):
-        return send_from_directory(os.path.join(HERE, "static", "img"), name, max_age=86400)
+    @app.get("/<any(img, css, js):folder>/<path:name>")
+    def static_file(folder, name):
+        return send_from_directory(os.path.join(HERE, "static", folder), name, max_age=86400 if folder == "img" else 300)
 
     @app.get("/api/menu")
     def api_menu():
