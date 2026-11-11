@@ -1,4 +1,6 @@
-// 菜园子 online ordering – menu, cart, ordering hours, checkout
+// 菜园子 online ordering – menu data, cart, ordering hours, checkout
+// ?menu = view-only menu (dishes and prices, no cart) – the website's food pictures link here
+const MENU_ONLY=new URLSearchParams(location.search).has("menu");
 // [id, 中文, English, MP price, U.P price, section, image slug, extra]
 const S = {
   sig:  ["招牌必点","Signature Dishes"],
@@ -90,7 +92,7 @@ function cardHTML(m){const [id,zh,en,mp,up,,img,ex={}]=m,o=optSel[id]||0,p=ex.op
   <div class="info"><div class="row"><div><div class="zh">${zh}</div><div class="en">${en}</div></div>${priceHTML(p[1],p[2])}</div>
   ${ex.opts?`<div class="opts">${ex.opts.map((x,i)=>`<button class="${i==o?"on":""}" onclick="pickOpt('${id}',${i})">${x[0]}</button>`).join("")}</div>`:""}
   <div class="add"><span class="note">${ex.note||""}</span>${ctrl(id+"|"+(ex.opts?o:0))}</div></div></article>`}
-function ctrl(key){const q=cart[key]||0;return q?`<span class="qty"><button onclick="chg('${key}',-1)" aria-label="Remove one">−</button><b>${q}</b><button onclick="chg('${key}',1)" aria-label="Add one">+</button></span>`
+function ctrl(key){if(MENU_ONLY)return "";const q=cart[key]||0;return q?`<span class="qty"><button onclick="chg('${key}',-1)" aria-label="Remove one">−</button><b>${q}</b><button onclick="chg('${key}',1)" aria-label="Add one">+</button></span>`
   :`<button class="plus" onclick="chg('${key}',1)">+ Add</button>`}
 
 function render(){
@@ -194,4 +196,10 @@ function qrSVG(seed){let h=0;for(const ch of seed)h=(h*31+ch.charCodeAt(0))>>>0;
     const on=f?(x%18===0||x%18===6||y%18===0||y%18===6||(x%18>1&&x%18<5&&y%18>1&&y%18<5)):(h>>16)&1;if(on)r+=`<rect x="${x}" y="${y}" width="1" height="1"/>`}
   return `<svg class="qr" viewBox="0 0 ${n} ${n}" fill="#111">${r}</svg>`}
 
-render();showHours();setInterval(()=>{showHours();if(document.body.classList.contains("open")&&step==="cart")drawCart()},60e3);
+function setupMenuOnly(){document.body.classList.add("menuonly");document.title="菜园子 Menu";
+  $(".cartbtn").outerHTML=`<a class="cartbtn" href="../#reserve">Book a table<i id="cnt" hidden></i><span id="ctot" hidden></span></a>`;
+  $(".hours").outerHTML=`<a class="back" href="../">← Back to website</a>`}
+if(MENU_ONLY)setupMenuOnly();
+render();
+if(location.hash)document.querySelector(location.hash)?.scrollIntoView();   // e.g. #s-cold from a website picture
+if(!MENU_ONLY){showHours();setInterval(()=>{showHours();if(document.body.classList.contains("open")&&step==="cart")drawCart()},60e3)}
